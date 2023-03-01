@@ -56,7 +56,7 @@ public class Game implements IWarnClock, IKeyListener {
         this.clock.start();
          this.board.paintBackground();
     }
-
+    /**/
     public void stop() {
         this.clock.stop();
     }

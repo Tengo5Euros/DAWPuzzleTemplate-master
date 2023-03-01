@@ -14,7 +14,7 @@ public class Bubble {
     private boolean debug = false;
     private State estado;
     private Point2D posicion;
-    private float angulo = 0;
+    private float angulo = 0;/**/
     private float velocidad = 1f;
     private BubbleType balltype;
     public static int WIDTH = 16, HEIGHT = 16;

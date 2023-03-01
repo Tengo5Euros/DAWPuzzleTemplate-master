@@ -18,7 +18,7 @@ import javafx.stage.WindowEvent;
  * JavaFX App
  */
 public class App extends Application {
-
+/**/
  private Game game;
     private Canvas primer_plano;
     private Canvas fondo;
@@ -72,3 +72,4 @@ public class App extends Application {
         launch();
     }
 }
+/*/

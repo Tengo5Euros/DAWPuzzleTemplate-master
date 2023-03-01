@@ -30,7 +30,7 @@ public class Shuttle {
     private static final float MAX_ANGLE = 180.0f;
     private boolean debug;
 
-
+    /**/
     public Shuttle(Point2D center) {
         this.center = center;
         this.angle = 90.0f;

@@ -28,7 +28,7 @@ public class Board implements IKeyListener {
     private GraphicsContext gc;
     private GraphicsContext bggc;
     private Dimension2D original_size;
-    private Bubble ball;
+    private Bubble ball;/**/
     private boolean debug;
     private boolean left_press, right_press;
 
