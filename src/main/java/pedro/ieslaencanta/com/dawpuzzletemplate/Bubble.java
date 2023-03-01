@@ -180,7 +180,7 @@ public class Bubble {
                     (this.getPosicion().getY()) * Game.SCALE - 5, 10, 10);
             gc.setStroke(Color.GREEN);
             gc.strokeText(this.angulo + "º x:" + this.getPosicion().getX() + " y:" + this.getPosicion().getY(), (this.getPosicion().getX() - WIDTH / 2) *
-            Game.SCALE, (this.getPosicion().getY() - HEIGHT / 2) * Game.SCALE);
+                    Game.SCALE, (this.getPosicion().getY() - HEIGHT / 2) * Game.SCALE);
         }
     }
     public boolean collision(Bubble ball) {

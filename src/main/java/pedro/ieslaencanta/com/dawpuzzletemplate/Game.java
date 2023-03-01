@@ -5,7 +5,6 @@
 package pedro.ieslaencanta.com.dawpuzzletemplate;
 
 
-import com.mycompany.dawpuzzletemplate.Board;
 import javafx.geometry.Dimension2D;
 
 import javafx.scene.canvas.GraphicsContext;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.dawpuzzletemplate;
+package pedro.ieslaencanta.com.dawpuzzletemplate;
 
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
@@ -10,9 +10,9 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import static javafx.scene.input.KeyCode.E;
+
 import javafx.scene.paint.Color;
-import pedro.ieslaencanta.com.dawpuzzletemplate.*;
+
 
 /**
  * Tablero del juego, posee un fondo (imagen estática, solo se cambia cuando se
@@ -132,7 +132,7 @@ public class Board implements IKeyListener {
 
     private void process_input() {
         if (this.left_press) {
-        this.shuttle.moveLeft();
+            this.shuttle.moveLeft();
         } else if (this.right_press) {
             this.shuttle.moveRight();
         } else {
@@ -192,11 +192,7 @@ public class Board implements IKeyListener {
                 this.paintBackground();
                 break;
             case SPACE:
-                this.ball=new Bubble();
-                //se coloca el tipo de forma aleatorioa
-                this.ball.setBalltype(BubbleType.values()[ (int)(Math.random()*BubbleType.values().length)]);
-                //se pone la posición (centro) y ángulo aleatorio
-                this.ball.init(new Point2D((this.game_zone.getMaxX() - this.game_zone.getWidth() / 2),(this.game_zone.getMaxY() - 18)), (float) (Math.random()*360));
+                this.ball= shuttle.Shoot();
                 this.ball.play();
                 break;
             case P:

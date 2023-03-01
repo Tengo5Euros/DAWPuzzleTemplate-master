@@ -33,7 +33,9 @@ public class Shuttle {
 
     public Shuttle(Point2D center) {
         this.center = center;
-        this.angle=90.0f;
+        this.angle = 90.0f;
+        this.actual= new Bubble();
+        this.siguiente= new Bubble();
     }
 
     /**
@@ -51,13 +53,15 @@ public class Shuttle {
     }
 
     private Bubble generateBall() {
-        this.actual.init(center, MIN_ANGLE);
-        return this.actual;
+        Bubble tempo;
+        tempo= new Bubble();
+        tempo.setBalltype(BubbleType.values()[(int) Math.random()* BubbleType.values().length]);
+        return tempo;
     }
 
     public void paint(GraphicsContext gc) {
         Resources r = Resources.getInstance();
-        Point2D p= this.getArrowPoint2D();
+        Point2D p = this.getArrowPoint2D();
         gc.drawImage(r.getImage("spriters"),
                 this.posX,
                 this.posY,
@@ -69,26 +73,37 @@ public class Shuttle {
                 Shuttle.HEIGHT * Game.SCALE);
 
 
-if(p!=null){
-    gc.drawImage(r.getImage("spriters"),
-            this.posXF+ p.getX()*65,
-            this.posYF+ p.getY()*65,
-            Shuttle.WIDTH_F,
-            Shuttle.HEIGHT_F,
-            (this.center.getX() - 64 / 2) * Game.SCALE,
-            (this.center.getY() - 64 / 2) * Game.SCALE,
-            Shuttle.WIDTH_F * Game.SCALE,
-            Shuttle.HEIGHT_F * Game.SCALE);
-}
+        if (p != null) {
+            if (this.angle <= 90) {
+                gc.drawImage(r.getImage("spriters"),
+                        this.posXF + p.getX() * 65,
+                        this.posYF + p.getY() * 65,
+                        Shuttle.WIDTH_F,
+                        Shuttle.HEIGHT_F,
+                        (this.center.getX() - 64 / 2) * Game.SCALE,
+                        (this.center.getY() - 64 / 2) * Game.SCALE,
+                        Shuttle.WIDTH_F * Game.SCALE,
+                        Shuttle.HEIGHT_F * Game.SCALE);
+            } else if (this.angle > 90) {
+                gc.drawImage(r.getImage("spriters"),
+                        this.posXF + p.getX() * 65,
+                        this.posYF + p.getY() * 65,
+                        Shuttle.WIDTH_F,
+                        Shuttle.HEIGHT_F,
+                        (this.center.getX() - 64 / 2 + 64) * Game.SCALE,
+                        (this.center.getY() - 64 / 2) * Game.SCALE,
+                        -Shuttle.WIDTH_F * Game.SCALE,
+                        Shuttle.HEIGHT_F * Game.SCALE);
+            }
 
 
-        if (this.isDebug()) {
-            gc.setStroke(Color.RED);
+            if (this.isDebug()) {
+                gc.setStroke(Color.RED);
 
-            gc.strokeText(this.angle + "º", this.center.getX(), this.center.getY());
+                gc.strokeText(this.angle + "º", this.center.getX(), this.center.getY());
+            }
+
         }
-
-
     }
 /*
 1.Dado un angulo de 90 a 0 pasar una imagen de 0-64
@@ -104,19 +119,36 @@ if(p!=null){
         int imagen;
         int fila, columna;
 
-        if (this.angle < 90) {
-            imagen =(int)( (90.0f - this.angle) / this.incr);
+        if (this.angle <= 90) {
+            imagen = (int) ((90.0f - this.angle) / this.incr);
             fila = imagen / 16;
             columna = imagen % 16;
+            if (imagen > 63) {
+                columna--;
+                fila--;
+            }
             p = new Point2D(columna, fila);
-
+        } else if (this.angle > 90) {
+            imagen = (int) ((180.0f - this.angle) / this.incr);
+            fila = 3 - imagen / 16;
+            columna = 15 - imagen % 16;
+            p = new Point2D(columna, fila);
         }
+
         return p;
     }
 
-    /*public Bubble Shoot(){
-        Bubble tempo= this.siguiente;
-    }*/
+    public Bubble Shoot() {
+        Bubble tempo = this.actual;
+        tempo.setPosicion(center);
+        tempo.setAngulo(360 - this.angle);
+        this.siguiente = this.actual;
+        this.actual = this.generateBall();
+
+        return tempo;
+    }
+
+
 
     public void moveRight() {
 
